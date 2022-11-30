@@ -1,2 +1,2 @@
-#!/bin/bai
+#!/bin/bash
 ls --indicator-style=slash -am

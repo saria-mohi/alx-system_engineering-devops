@@ -1,1 +1,1 @@
-input output redirections 
+input output redirections

@@ -1,38 +1,46 @@
-1. What is the server?
-ANSWER: server is a computer hardware or software that provides services to other computers, which are usually referred to as clients.
+1. For every additional element, why you are adding it?
+ANSWER: This is a 3-server web infrastructure that is secured, monitored, and serves encrypted traffic.
 
-2. What is the role of the domain name?
-ANSWER: To provide a human-friendly alias for an IP Address. For example, the domain name www.wikipedia.org is easier to recognize and remember than 91.198.174.192. The IP address and domain name alias is mapped in the Domain Name System (DNS)
+2. What are firewalls for?
+ANSWER: For protecting the network (web servers, anyway) from unwanted and unauthorized users by acting as an intermediary between the internal network and the external network and blocking the incoming traffic matching the aforementioned criteria.
 
-3. What type of DNS record www is in www.foobar.com?
-ANSWER: www.foobar.com uses an A record.
-The results might be different but for the infrastructure in this design, an A record is used.
-Address Mapping record (A Record)—also known as a DNS host record, stores a hostname and its corresponding IPv4 address.
-This can be checked by running dig www.foobar.com.
+3. Why is the traffic served over HTTPS?
+ANSWER: HTTPS stands for HyperText Transfer Protocol Secure, and the traffic is served in order to bring protection by using the secure port 443, which encrypts outgoing information. Then it is more difficult to spy or get access to the site’s information. 
+The protocol keeps communications secure so that malicious parties can't observe what data is being sent.
 
-4. What is the role of the web server?
-ANSWER: To responds with the content of the requested resource or an error messsage.
+4. What monitoring is used for?
+ANSWER: Monitoring is used to track changes in program outputs and performance over time.
+It's usd to help in the continuous improvement of the resources performance.
 
-5. What is the role of the application server?
-ANSWER: To install, operate and host applications and associated services for end users, IT services and organizations and facilitates the hosting and delivery of high-end consumer or business applications.
+5. How the monitoring tool is collecting data?
+ANSWER: 
 
-6. What is the role of the database?
-ANSWER: To maintain a collection of organized information that can easily be accessed, managed and updated.
 
-7. What is the server using to communicate with the computer of the user requesting the website?
-ANSWER: Use to Communication between the client and the server occurs over the internet network through the TCP/IP protocol suite.
+    #1. NewRelic
+        NewRelic requires you to add a piece of JavaScript to your website, this agent will collect information and send it back to the New Relic servers. It will give you a detailed analysis of how quickly your website loads in a browser, with a detailed analysis at every level of the stack. If the website is loading too slowly or users are experiencing error (500), there is a feature that allows you to trigger an alert. NewRelic now does much more than this, I’ll let you discover the rest.
+
+    #2. DataDog
+        DataDog allows you to measure and monitor everything with graphs. It gathers performance data from all your application components. The service has a lot of integrations. You usually just need to properly configure your alert and you are good to go with solid monitoring coverage.
+
+    #3. Uptime Robot
+        Uptime Robot is a simple service that will check that your website is responding from multiple locations in the world. This is the bare minimum when you host a website.
+
+    #4. Nagios
+        Nagios is an open source project started in 1999, it is among the most widely used monitoring tools in the tech industry. It is, however, seen as outdated. Nagios had trouble adapting to the rise of the Cloud but is slowly trying to catch up.
+
+    #5. WaveFront
+        Wavefront is a cutting edge monitoring service funded by great software engineers who’ve built monitoring tools for the best tech companies in Silicon Valley. The idea is to be able to analyze anything that can produce data points. A query language that looks like SQL allows users to apply mathematical operations to these data points to extract values or detect anomalies from the time series data. While it takes some time to get used to the tool, it’s the type of monitoring that the best companies are using. To my knowledge, LinkedIn, Facebook and DropBox are using a very similar tool for their monitoring needs.
+
+6. Explain what to do if you want to monitor your web server QPS?
+ANSWER: Queries per second is a measure of the rate of traffic going in a particular server serving a Web domain. It is an important metric to monitor, because it can help you decide whether to scale the server in order to cope with the demand of usage, and resource requirement so the web page won’t collapse in the future with overload server request.
+
 
 Issue Infrastructure:
-1. SPOF:
-There are multiple SPOF (Single Point Of Failure) in this infrastructure.
-For example, if the MySQL database server is down, the entire site would be down.
+1. Why terminating SSL at the load balancer level is an issue?
+Terminating SSL at the load balancer level would leave the traffic between the load balancer and the web servers unencrypted.
 
-2. Downtime when maintenance needed:
-When we need to run some maintenance checks on any component, they have to be put down or the server has to be turned off. Since there's only one server, the website would be experiencing a downtime.
+2. Why having only one MySQL server capable of accepting writes is an issue?
+Having one MySQL server is an issue because it is not scalable and can act as a single point of failure for the web infrastructure.
 
-3. Cannot scale if there's too much incoming traffic:
-It would be hard to scale this infrastructure becauses one server contains the required components. The server can quickly run out of resources or slow down when it starts receiving a lot of requests.
-
-
-
-
+3. Why having servers with all the same components (database, web server and application server) might be a problem?
+Having servers with all the same components would make the components contend for resources on the server like CPU, Memory, I/O, etc., which can lead to poor performance and also make it difficult to locate the source of the problem. A setup such as this is not easily scalable.

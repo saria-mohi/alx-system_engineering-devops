@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-# Install nginx on your web-01 server
-
+# Installs nginx server
 apt-get update
 apt-get -y install nginx
 ufw allow 'Nginx HTTP'
-ufw allow 'SSH'
 echo "Hello World!" > /var/www/html/index.html
-sudo service nginx restart
+service nginx start

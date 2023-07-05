@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # This script configures web-0w to be identical to the web-01
-sudo apt-get -y update
+sudo apt-get update
 sudo apt-get -y install nginx
 sudo sed -i '19 i \\tadd_header X-Served-By $HOSTNAME;' /etc/nginx/sites-available/default
-sudo srvice nginx restart
+sudo service nginx restart

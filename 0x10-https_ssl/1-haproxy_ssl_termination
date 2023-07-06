@@ -41,11 +41,11 @@ frontend  ollyjhay-frontend
         default_backend ollyjhay-backend
 backend ollyjhay-backend
         balance roundrobin
-        server 93511-web-01 100.26.233.228:80 check
-        server 93511-web-02 334.229.67.124:80 check
+        server 190869-web-01 100.26.233.228:80 check
+        server 190869-web-02 334.229.67.124:80 check
 
 listen http-in
         bind :80
         balance roundrobin
-        server 93511-web-01 100.26.233.228:80 check
-        server 93511-web-02 34.229.67.124:80 check
+        server 190869-web-01 100.26.233.228:80 check
+        server 190869-web-02 334.229.67.124:80 check

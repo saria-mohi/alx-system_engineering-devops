@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# script to report information about server domains
-# shellcheck disable=SC2086
+# Configure your domain zone so that the subdomain
 check_domain() {
 	# awk will use record seperator of space
 	# space sperated list of sub domains

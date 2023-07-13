@@ -1,19 +1,71 @@
 #!/usr/bin/env bash
-# redirect_me is redirecting to another page.
-# The redirection is configured as a "301 Moved Permanently"
+# Installing Nginx on our webserver
 
-apt-get update
-apt-get install -y nginx
 
-mkdir /etc/nginx/html
-touch /etc/nginx/html/index.html
-echo "Hello Word!" > /etc/nginx/html/index.html
-printf %s "server {
-    listen 80;
-    listen [::]:80 default_server;
-    root   /etc/nginx/html;
-    index  index.html index.htm;
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-    }
-}" > /etc/nginx/sites-available/default
+# First we ensure our port is not currently in use
+
+# lsof - list our files pid status
+# -i specfies the protocol port number
+# -t ensures that only matching case
+
+port_status=$(lsof -t -i :80) # since it's an arrary
+for pid in $port_status
+do
+	sudo kill "$pid" &>/dev/null
+done
+
+# to install Nginx on the webserver
+# we need supress out-put questions
+# we use -y to supress confirmation
+sudo apt-get -y update;
+sudo apt-get -y install nginx;
+
+# add to our firewall allowed services
+sudo ufw allow 80/tcp;
+sudo ufw allow 'Nginx HTTP';
+
+# to start Nginx
+sudo nginx
+
+# to set the default block to listen to port 80
+
+sudo tee /etc/nginx/sites-available/default <<EOF
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+	server_name saria-mohi.tech;
+	
+	# configure /redirect_me to 301 Moved Permanently
+	rewrite ^/redirect_me$ http://saria-mohi.tech permanent;
+
+	location / {
+		try_files \$uri \$uri/ =404;
+	}
+}
+EOF
+
+#create the hmtl page for Nginx
+sudo tee /var/www/html/index.html <<EOF
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello World!</title>
+</head>
+<body>
+	<h1>Hello World!</h1>
+</body>
+</html>
+EOF
+
+# reload the server
+sudo service nginx reload
+
+# test the webserver by quering the root with curl
+if curl -s localhost:80 | grep -q "Hello World!"; then
+	echo "Nginx is listening on Port 80: Success";
+else
+	echo "Nginx is not listening on Port 80: Failed";
+fi;
+

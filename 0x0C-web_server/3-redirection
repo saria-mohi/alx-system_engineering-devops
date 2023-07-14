@@ -38,7 +38,7 @@ server {
 	server_name saria-mohi.tech;
 	
 	# configure /redirect_me to 301 Moved Permanently
-	rewrite ^/redirect_me$ http://saria-mohi.tech permanent;
+	rewrite ^/redirect_me http://saria-mohi.tech permanent;
 
 	location / {
 		try_files \$uri \$uri/ =404;

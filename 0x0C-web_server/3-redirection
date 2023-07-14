@@ -69,4 +69,3 @@ else
 	echo "Nginx is not listening on Port 80: Failed";
 fi;
 
-

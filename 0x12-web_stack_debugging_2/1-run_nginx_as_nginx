@@ -1,18 +1,11 @@
 #!/usr/bin/env bash
-#fix the docker container running on nginx and change the 
-#user:- root  to user:- nginx 
+# set nginx as user
 
-#set the user to nginx
 sudo sed '2i\user nginx\;' /etc/nginx/nginx.conf
 
-#make nginx listen to port 8080
 sed -i 's/80/8080/g' /etc/nginx/sites-available/default
 
-#grant the user access to nginx.conf
 chmod 644 /etc/nginx/nginx.conf
 
-#apache the stubborn goat is listening on port 8080
 pkill apache2
-
-#restart nginx
 sudo -u nginx service nginx restart

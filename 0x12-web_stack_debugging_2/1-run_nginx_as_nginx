@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+<<<<<<< HEAD
 #fix the docker container running on nginx and change the 
 #user:- root  to user:- nginx 
 
@@ -16,3 +17,11 @@ pkill apache2
 
 #restart nginx
 sudo -u nginx service nginx restart
+=======
+# Fixes the issue with the server
+chmod 644 /etc/nginx/nginx.conf
+sed -Ei 's/\s*#?\s*user .*/user nginx;/' /etc/nginx/nginx.conf
+sed -Ei 's/(listen (\[::\]:)?80) /\180 /' /etc/nginx/sites-enabled/default
+pkill apache2
+su nginx -s /bin/bash -c 'service nginx restart'
+>>>>>>> parent of bc07277 (Update 1-run_nginx_as_nginx)

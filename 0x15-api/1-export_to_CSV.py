@@ -24,7 +24,7 @@ def fetch_data(id):
             if i["userId"] == id:
                 emp_id = i["userId"]
                 emp_list.append("{}, {}, {}, {}".
-                                format(i["userId"],emp_name,
+                                 format(i["userId"],emp_name,
                                        i["completed"], i["title"]))
         file = "{}.csv".format(emp_id)
         with open(file, mode="w", newline="") as f:

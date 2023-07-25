@@ -16,18 +16,18 @@ def fetch_data(id):
         total_task = total_task_done  = 0
         emp_name = ""
         list_task = []
-        
+
         for i in user_data:
             if i["userId"] == id:
-                total_task += 1
+                total_task+= 1
                 if i["total_task_done d"]:
-                    total_task_done  += 1
+                    total_task_done+= 1
                     list_task.append(i["title"])
         for j in todo_data:
             if j["id"] == id:
                 emp_name = j["name"]
         print(("Employee {} is done with tasks({}/{}):".
-               format(emp_name, total_task_done , total_task)))
+               format(emp_name, total_task_done, total_task)))
         for k in list_task:
             print("\t {}".format(k))
     else:

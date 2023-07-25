@@ -17,12 +17,9 @@ if __name__ == "__main__":
 
     response = requests.get(url)
     todolist_data = requests.get(url + "/todos")
-    """print(todolist_data.json())"""
 
     e_name = response.json().get("name")
-    """print(e_name)"""
     all_tasks = todolist_data.json()
-    """print(all_tasks)"""
 
     done = 0
     done_tasks = []
@@ -30,7 +27,6 @@ if __name__ == "__main__":
         if task.get('completed'):
             done_tasks.append(task)
             done += 1
-    """print(done_tasks)"""
     print("Employee {} is done with tasks({}/{}):".format(
         e_name, len(done_tasks), len(all_tasks)))
 

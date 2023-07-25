@@ -4,7 +4,6 @@ import requests
 import sys
 
 if __name__ == "__main__":
-    url = "https://jsonplaceholder.typicode.com/"
     user_data = requests.get("https://jsonplaceholder.typicode.com/users/{}"
                              .format(sys.argv[1])).json()
     tasks = requests.get("https://jsonplaceholder.typicode.com/todos", 

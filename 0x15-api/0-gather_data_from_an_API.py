@@ -10,9 +10,9 @@ import sys
 
 
 if __name__ == "__main__":
-    employee_id = sys.argv[1]
+    user_id = sys.argv[1]
     url_user = "https://jsonplaceholder.typicode.com/users"
-    user_data = url_user + "/" + employee_id
+    user_data = url_user + "/" + user_id
 
     response = requests.get(user_data)
     todolist = requests.get(user_data + "/todos")

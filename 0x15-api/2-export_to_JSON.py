@@ -15,16 +15,16 @@ if __name__ == "__main__":
     response = requests.get(user_data)
     username = response.json().get('username')
 
-    todos_path = user_data + "/todos"
-    response = requests.get(todos_path)
+    todolist = user_data + "/todos"
+    response = requests.get(todolist)
     tasks = response.json()
 
-    dic = {user_id: []}
+    dic_file = {user_id: []}
     for task in tasks:
-        dic[user_id].append({
+        dic_file[user_id].append({
             "task": task.get('title'),
             "completed": task.get('completed'),
             "username": username})
 
     with open('{}.json'.format(user_id), 'w') as json_file:
-        json.dump(dic, json_file)
+        json.dump(dic_file, json_file)

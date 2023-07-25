@@ -7,7 +7,7 @@ if __name__ == "__main__":
     user_data = requests.get("https://jsonplaceholder.typicode.com/users/{}"
                              .format(sys.argv[1])).json()
     tasks = requests.get("https://jsonplaceholder.typicode.com/todos", 
-                         params={"userId": sys.argv[1]}).json()
+                        params={"userId": sys.argv[1]}).json()
 
     completed = [task.get("title") for task in tasks if task.
                  get("completed") is True]

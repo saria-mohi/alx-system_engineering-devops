@@ -5,33 +5,33 @@ import requests
 import sys
 
 
-def to_do(num):
+def fetch_data(id):
     """Returns the number of tasks for a given employee ID"""
-    if type(num) == int:
-        url_todo = "https://jsonplaceholder.typicode.com/todos"
-        url_user = "https://jsonplaceholder.typicode.com/users"
+    if type(id) == int:
+        url_user_data = "https://jsonplaceholder.typicode.com/users"
+        url_todo_data = "https://jsonplaceholder.typicode.com/todos"
 
-        raw_todo = requests.get(url_todo).json()
-        raw_user = requests.get(url_user).json()
+        user_data = requests.get(url_user_data).json()
+        todo_data = requests.get(url_todo_data).json()
 
         emp_name = ""
         emp_id = 0
-        py_form = []
-        for j in raw_user:
-            if j["id"] == num:
+        emp_list = []
+        for j in user_data:
+            if j["id"] == id:
                 emp_name = j["username"]
-        for i in raw_todo:
-            if i["userId"] == num:
+        for i in todo_data:
+            if i["userId"] == id:
                 emp_id = i["userId"]
-                py_form.append("{}, {}, {}, {}".
-                               format(i["userId"],
-                                      emp_name,
-                                      i["completed"],
-                                      i["title"]))
+                emp_list.append("{}, {}, {}, {}".
+                                format(i["userId"],
+                                       emp_name,
+                                       i["completed"],
+                                       i["title"]))
         file = "{}.csv".format(emp_id)
         with open(file, mode="w", newline="") as f:
             wr = csv.writer(f, quoting=csv.QUOTE_ALL)
-            for k in py_form:
+            for k in emp_list:
                 csv_form = [val.strip() for val in k.split(", ")]
                 wr.writerow(csv_form)
 
@@ -40,4 +40,4 @@ def to_do(num):
 
 
 if __name__ == "__main__":
-    to_do(int(sys.argv[1]))
+    fetch_data(int(sys.argv[1]))

@@ -1,28 +1,18 @@
 #!/usr/bin/python3
-"""module for fetching data using RESTFUL API"""
-
+"""Exports to-do list information for a given employee ID to JSON format."""
 import json
 import requests
 import sys
 
-
-def fetch_data(id):
-    """fetch data base on the id and process data"""
+if __name__ == "__main__":
     user_id = sys.argv[1]
-    url_user_data = "https://jsonplaceholder.typicode.com/users"
-    url_todo_data = "https://jsonplaceholder.typicode.com/todos"
-
-    user_data = requests.get(url_user_data).json()
-    todo_data = requests.get(url_todo_data).json()
+    user_data = requests.get("https://jsonplaceholder.typicode.com/users".format(user_id)).json()
     username = user_data.get("username")
+    todo_data = requests.get("https://jsonplaceholder.typicode.com/todos", params={"userId": user_id}).json()
+
     with open("{}.json".format(user_id), "w") as jsonfile:
         json.dump({user_id: [{
                 "task": t.get("title"),
                 "completed": t.get("completed"),
                 "username": username
             } for t in todo_data]}, jsonfile)
-
-
-
-if __name__ == "__main__":
-    fetch_data(int(sys.argv[1]))

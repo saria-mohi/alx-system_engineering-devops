@@ -11,22 +11,22 @@ if __name__ == "__main__":
     response = requests.get("https://jsonplaceholder.typicode.com/users")
     users = response.json()
 
-    dic = {}
+    dic_file = {}
     for u in users:
         user_id = u.get('id')
         username = u.get('username')
-        initial_url = "https://jsonplaceholder.typicode.com/users/{}".format(
+        url_user = "https://jsonplaceholder.typicode.com/users/{}".format(
                 user_id)
-        url = initial_url + "/todos"
-        response2 = requests.get(url)
+        user_data = url_user + "/todos"
+        response2 = requests.get(user_data)
         tasks = response2.json()
-        dic[user_id] = []
+        dic_file[user_id] = []
 
         for task in tasks:
-            dic[user_id].append({
+            dic_file[user_id].append({
                 "task": task.get('title'),
                 "completed": task.get('completed'),
                 "username": username})
 
     with open('todo_all_employees.json', 'w') as file:
-        json.dump(dic, file)
+        json.dump(dic_file, file)

@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-Python script that returns information
-about employee todo list progress
+Retrive data form API
 """
 
 

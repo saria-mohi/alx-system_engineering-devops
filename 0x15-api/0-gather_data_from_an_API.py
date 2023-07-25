@@ -12,27 +12,24 @@ import sys
 
 if __name__ == "__main__":
     employee_id = sys.argv[1]
-    initial_url = "https://jsonplaceholder.typicode.com/users"
-    url = initial_url + "/" + employee_id
+    url_user_data = "https://jsonplaceholder.typicode.com/users"
+    user_data = url_user_data + "/" + employee_id
 
-    response = requests.get(url)
-    todolist_data = requests.get(url + "/todos")
-    """print(todolist_data.json())"""
+    response = requests.get(user_data)
+    todo_data = requests.get(user_data + "/todos")
 
-    e_name = response.json().get("name")
-    """print(e_name)"""
-    all_tasks = todolist_data.json()
-    """print(all_tasks)"""
+    emp_name = response.json().get("name")
 
-    done = 0
-    done_tasks = []
-    for task in all_tasks:
+    tasks = todo_data.json()
+
+    total_task = 0
+    list_tasks = []
+    for task in tasks:
         if task.get('completed'):
-            done_tasks.append(task)
-            done += 1
-    """print(done_tasks)"""
+            list_tasks.append(task)
+            total_task += 1
     print("Employee {} is done with tasks({}/{}):".format(
-        e_name, len(done_tasks), len(all_tasks)))
+        emp_name, len(list_tasks), len(tasks)))
 
-    for task in done_tasks:
+    for task in list_tasks:
         print("\t {}".format(task.get('title')))

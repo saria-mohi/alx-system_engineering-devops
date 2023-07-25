@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-"""Module 0-gather_data_from_an_API.py"""
+"""module for fetching data using RESTFUL API"""
 import csv
 import requests
 import sys
 
 
 def fetch_data(id):
-    """Returns the number of tasks for a given employee ID"""
+    """fetch data base on the id and process data"""
     if type(id) == int:
         url_user_data = "https://jsonplaceholder.typicode.com/users"
         url_todo_data = "https://jsonplaceholder.typicode.com/todos"

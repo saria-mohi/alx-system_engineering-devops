@@ -9,13 +9,13 @@ import sys
 
 if __name__ == "__main__":
     user_id = sys.argv[1]
-    initial_url = "https://jsonplaceholder.typicode.com/users"
-    url = initial_url + "/" + user_id
+    url_user = "https://jsonplaceholder.typicode.com/users"
+    user_data = url_user + "/" + user_id
 
-    response = requests.get(url)
+    response = requests.get(user_data)
     username = response.json().get('username')
 
-    todos_path = url + "/todos"
+    todos_path = user_data + "/todos"
     response = requests.get(todos_path)
     tasks = response.json()
 

@@ -12,11 +12,11 @@ import sys
 
 if __name__ == "__main__":
     employee_id = sys.argv[1]
-    initial_url = "https://jsonplaceholder.typicode.com/users"
-    url = initial_url + "/" + employee_id
+    url_user = "https://jsonplaceholder.typicode.com/users"
+    user_data = url_user + "/" + employee_id
 
-    response = requests.get(url)
-    todolist = requests.get(url + "/todos")
+    response = requests.get(user_data)
+    todolist = requests.get(user_data + "/todos")
 
     emp_name = response.json().get("name")
     all_tasks = todolist.json()

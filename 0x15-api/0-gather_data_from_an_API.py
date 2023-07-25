@@ -16,19 +16,19 @@ if __name__ == "__main__":
     url = initial_url + "/" + employee_id
 
     response = requests.get(url)
-    todolist_data = requests.get(url + "/todos")
+    todolist = requests.get(url + "/todos")
 
-    e_name = response.json().get("name")
-    all_tasks = todolist_data.json()
+    emp_name = response.json().get("name")
+    all_tasks = todolist.json()
 
-    done = 0
+    completed = 0
     done_tasks = []
     for task in all_tasks:
         if task.get('completed'):
             done_tasks.append(task)
-            done += 1
+            completed += 1
     print("Employee {} is done with tasks({}/{}):".format(
-        e_name, len(done_tasks), len(all_tasks)))
+        emp_name, len(done_tasks), len(all_tasks)))
 
     for task in done_tasks:
         print("\t {}".format(task.get('title')))

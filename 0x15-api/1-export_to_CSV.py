@@ -18,7 +18,7 @@ if __name__ == "__main__":
     todolist = user_data + "/todos"
     response = requests.get(todolist)
     tasks = response.json()
-    
+
     # convert to CSV file
     with open('{}.csv'.format(user_id), 'w') as csv_file:
         for task in tasks:

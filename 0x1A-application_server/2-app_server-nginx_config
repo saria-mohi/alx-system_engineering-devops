@@ -1,0 +1,31 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+	# server_name saria.mohi.tech www.saria.mohi.tech;
+	# server_name saria-mohi.tech www.saria-mohi.tech;
+	server_name _;
+
+	location /hbnb_static {
+		alias /data/web_static/current/;
+		autoindex off;
+	}
+
+		
+        # set error 404 page to a custom page
+        error_page 404 /404.html;
+        location = /404.html {
+                root /var/www/html;
+                internal;
+        }
+	
+	# configure /redirect_me to 301 Moved Permanently
+	rewrite ^/redirect_me http://saria-mohi.tech permanent;
+
+	location / {
+		try_files $uri $uri/ =404;
+		add_header X-Served-By $hostname;
+	}
+}
+

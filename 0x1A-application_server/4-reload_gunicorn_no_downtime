@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bash script to reload Gunicorn in a graceful way.
+# Bash script to reload Gunicorn gracefully
 
 # Get the PID of the Gunicorn process
 gunicorn_pid=$(pgrep gunicorn | head -n 1 )
